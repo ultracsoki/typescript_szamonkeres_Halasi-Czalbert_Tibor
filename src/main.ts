@@ -24,7 +24,6 @@ function felvetel() {
     osszDarabszam = osszDarabszam + 1;
     osszAr = osszAr + price;
     document.getElementById('osszesito')!.textContent = `Összesítő: Eddig felvett szobrok száma: ${osszDarabszam}, összesített áruk: ${osszAr}`;
-    document.getElementById('osszAr')!.textContent = `${osszAr}`;
     document.getElementById('hibaUzenet')!.textContent = "Sikeres adatfelvétel!";
     document.getElementById('hibaUzenet')!.style.color = "green";
   }
@@ -32,32 +31,13 @@ function felvetel() {
 
 
 function ellenorzes(nev: string, year: number, price: number, height: number) {
-  const mintaNev = /^[a-zA-z, ]+$/;
-  const currentYear = new Date().getFullYear();
   try {
-    if (nev == '') {
-      throw new Error("A szobor neve nem lehet üres!");
-    }
-    else if (!mintaNev.test(nev)) {
-      throw new Error("Csak az angol ABC karaktereket, szőköz ill. vessző karaktereket tartalmazhat!");
-    }
-    else if (year > currentYear) {
-      throw new Error("A készítés éve max. az aktuális évszám lehet!");
-    }
-    else if (price < 5) {
-      throw new Error("Az érték min. 5 Ft kell, hogy legyen!");
-    }
-    else if (height < 15) {
-      throw new Error("A magasság min 15 cm-nek kell, hogy legyen!");
-    }
-    else {
-      szobrok.push(new Statue(nev, year, price, height));
-      return true;
-    }
+    szobrok.push(new Statue(nev, year, price, height));
   } catch (errorUzenet) {
     if (errorUzenet instanceof Error) {
       document.getElementById('hibaUzenet')!.textContent = errorUzenet.message;
       return false;
     }
   }
+  return true;
 }

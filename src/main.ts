@@ -50,8 +50,7 @@ function ellenorzes(nev: string, year: number, price: number, height: number) {
     else if (height < 15) {
       throw new Error("A magasság min 15 cm-nek kell, hogy legyen!");
     }
-    else 
-    {
+    else {
       szobrok.push(new Statue(nev, year, price, height));
       return true;
     }
